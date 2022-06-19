@@ -11,13 +11,13 @@ function App() {
   //checks if count and expense are in local storage
   if (window.localStorage.getItem("count") === null) {
     count = 0;
-    console.log("this is count " + count);
+    // console.log("this is count " + count);
   } else {
     count = JSON.parse(window.localStorage.getItem("count"));
     for (let i = 1; i <= count; i++) {
       arr.push(JSON.parse(window.localStorage.getItem(`expense${i}`)));
     }
-    console.log("this is count " + count);
+    // console.log("this is count " + count);
   }
 
   //check if delete is trigger
@@ -25,7 +25,13 @@ function App() {
 
   //maps all expenses
   const displayExpenses = arr.map((item) => (
-    <li key={new Date() + Math.random()}>{item.Item}</li>
+    <tr key={new Date() + Math.random()}>
+      <td>{arr.indexOf(item) + 1}.</td>
+      <td>{item.Item}</td>
+      <td>{item.Amount}</td>
+      <td>{item.Category}</td>
+      <td>{item.ExpenseDate}</td>
+    </tr>
   ));
 
   //information to be collected for expense tracker
@@ -41,7 +47,7 @@ function App() {
     const label = e.target.name;
     const input = e.target.value;
     setInput({ ...userInput, [label]: input });
-    console.log(userInput);
+    // console.log(userInput);
   };
 
   //store expense item in local storage and clear form
@@ -121,7 +127,18 @@ function App() {
         <button onClick={handleDelete}>Clear All Expenses</button>
       </div>
       <div>
-        <ol type="1">{del ? "" : displayExpenses}</ol>
+        <table>
+          <tbody>
+            <tr>
+              <th>No.</th>
+              <th>Expenses</th>
+              <th>Amount</th>
+              <th>Catergory</th>
+              <th>Date</th>
+            </tr>
+            {del ? "" : displayExpenses}
+          </tbody>
+        </table>
       </div>
     </div>
   );
