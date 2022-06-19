@@ -1,10 +1,23 @@
 import "./App.css";
 import { useState } from "react";
-// import { useEffect } from "react";
 
 function App() {
+  let arr = [];
+
   //count how many expense items
-  let count = 0;
+  let count;
+
+  //checks if count is in local storage
+  if (window.localStorage.getItem("count") === null) {
+    count = 0;
+    console.log("this is count " + count);
+  } else {
+    count = JSON.parse(window.localStorage.getItem("count"));
+    for (let i = 1; i <= count; i++) {
+      arr.push(JSON.parse(window.localStorage.getItem(`expense${i}`)));
+    }
+    console.log("this is count " + count);
+  }
 
   //information to be collected for expense tracker
   const [userInput, setInput] = useState({
@@ -29,31 +42,62 @@ function App() {
     console.log("this is submit " + userInput);
     window.localStorage.setItem(`expense${count}`, JSON.stringify(userInput));
     window.localStorage.setItem("count", JSON.stringify(count));
+    setInput({
+      Item: "",
+      Amount: "",
+      Category: "",
+      ExpenseDate: "",
+    });
   };
 
-  // const handleDisplay = () => {
-  //   const getExpense = JSON.parse(window.localStorage.getItem("expense"));
-  //   console.log(getExpense);
-  // };
-
-  // useEffect(() => {
-  //   handleDisplay();
-  // }, []);
+  const handleDelete = (e) => {
+    e.preventDefault();
+    console.log("delete clicked");
+    window.localStorage.clear();
+    count = 0;
+    arr = [];
+  };
 
   return (
     <div className="App">
       <header className="App-header">Expense Tracker</header>
       <div>
         <form>
-          <input type="text" name="Item" onChange={handleChange} />
-          <input type="text" name="Amount" onChange={handleChange} />
-          <input type="text" name="Category" onChange={handleChange} />
-          <input type="date" name="ExpenseDate" onChange={handleChange} />
-          {/* <input type="submit" value="Add Expense" /> */}
+          <input
+            type="text"
+            name="Item"
+            value={userInput.Item}
+            onChange={handleChange}
+          />
+          <input
+            type="text"
+            name="Amount"
+            value={userInput.Amount}
+            onChange={handleChange}
+          />
+          <input
+            type="text"
+            name="Category"
+            value={userInput.Category}
+            onChange={handleChange}
+          />
+          <input
+            type="date"
+            name="ExpenseDate"
+            value={userInput.ExpenseDate}
+            onChange={handleChange}
+          />
         </form>
         <button onClick={handleSubmit}>Add Expenses</button>
+        <button onClick={handleDelete}>Clear All Expenses</button>
       </div>
-      <div></div>
+      <div>
+        <ol type="1">
+          {arr.map((item) => (
+            <li key={new Date() + Math.random()}>{item.Item}</li>
+          ))}
+        </ol>
+      </div>
     </div>
   );
 }
