@@ -42,6 +42,9 @@ function App() {
     ExpenseDate: "",
   });
 
+  //check if all inputs are entered
+  const [inputError, setInputError] = useState(false);
+
   //set user input
   const handleChange = (e) => {
     const label = e.target.name;
@@ -50,22 +53,48 @@ function App() {
     // console.log(userInput);
   };
 
+  //to validate if amount is in numbers and 2 decimal place
+  const validateAmount = (amt) => {
+    const re = /^\s*-?(\d+(\.\d{1,2})?|\.\d{1,2})\s*$/;
+    return re.test(amt);
+  };
+
+  //to check if amount is in number and 2 decimal place
+  const [amtDecimal, setAmtDecimal] = useState(null);
+
+  //to check amount on blur
+  const handleAmtBlur = () => {
+    let amtValid = validateAmount(userInput.Amount);
+    amtValid ? setAmtDecimal(true) : setAmtDecimal(false);
+  };
+
   //store expense item in local storage and clear form
   const handleSubmit = (e) => {
     e.preventDefault();
-    count++;
-    console.log("this is submit " + userInput);
-    window.localStorage.setItem(`expense${count}`, JSON.stringify(userInput));
-    window.localStorage.setItem("count", JSON.stringify(count));
-    setDel(false);
-    setInput({
-      Item: "",
-      Amount: "",
-      Category: "",
-      ExpenseDate: "",
-    });
-    let dropDown = document.getElementById("cat");
-    dropDown.selectedIndex = "";
+    if (
+      userInput.Item &&
+      userInput.Amount &&
+      userInput.Category &&
+      userInput.ExpenseDate &&
+      validateAmount(userInput.Amount)
+    ) {
+      setInputError(false);
+      count++;
+      console.log("this is submit " + userInput);
+      window.localStorage.setItem(`expense${count}`, JSON.stringify(userInput));
+      window.localStorage.setItem("count", JSON.stringify(count));
+      setDel(false);
+      setInput({
+        Item: "",
+        Amount: "",
+        Category: "",
+        ExpenseDate: "",
+      });
+      let dropDown = document.getElementById("cat");
+      dropDown.selectedIndex = "";
+    } else {
+      setInputError(true);
+    }
   };
 
   //clear all items in local storage
@@ -79,66 +108,86 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <header className="App-header">Expense Tracker</header>
-      <div>
-        <form>
-          <label htmlFor="Item">Expense: </label>
-          <input
-            type="text"
-            name="Item"
-            value={userInput.Item}
-            onChange={handleChange}
-          />
-          <br />
-          <br />
-          <label htmlFor="Amount">Amount($): </label>
-          <input
-            type="text"
-            name="Amount"
-            value={userInput.Amount}
-            onChange={handleChange}
-          />
-          <br />
-          <br />
-          <label htmlFor="Category">Category: </label>
-          <select name="Category" onChange={handleChange} id="cat">
-            <option value=""></option>
-            <option value="Food">Food</option>
-            <option value="Entertainment">Entertainment</option>
-            <option value="Shopping">Shopping</option>
-            <option value="Bills">Bills</option>
-            <option value="Insurance">Insurance</option>
-            <option value="Loans">Loans</option>
-          </select>
-          <br />
-          <br />
-          <label htmlFor="Amount">Date of Expenditure: </label>
-          <input
-            type="date"
-            name="ExpenseDate"
-            value={userInput.ExpenseDate}
-            onChange={handleChange}
-          />
-          <br />
-          <br />
-        </form>
-        <button onClick={handleSubmit}>Add Expenses</button>
-        <button onClick={handleDelete}>Clear All Expenses</button>
-      </div>
-      <div>
-        <table>
-          <tbody>
-            <tr>
-              <th>No.</th>
-              <th>Expenses</th>
-              <th>Amount</th>
-              <th>Catergory</th>
-              <th>Date</th>
-            </tr>
-            {del ? "" : displayExpenses}
-          </tbody>
-        </table>
+    <div className="container">
+      <div className="expensetracker">
+        <header className="header">Expense Tracker</header>
+        <div className="headerline" />
+        <div className="expenseform">
+          <form>
+            <div className="expenseinput">
+              <label htmlFor="Item">Expense: </label>
+              <input
+                type="text"
+                name="Item"
+                value={userInput.Item}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="expenseinput">
+              <label htmlFor="Amount">Amount($): </label>
+              <input
+                type="text"
+                name="Amount"
+                value={userInput.Amount}
+                onChange={handleChange}
+                onBlur={handleAmtBlur}
+              />
+            </div>
+            {amtDecimal === false ? (
+              <span className="inputerror">
+                Please enter a 2 decimal number
+              </span>
+            ) : (
+              ""
+            )}
+            <div className="expenseinput">
+              <label htmlFor="Category">Category: </label>
+              <select name="Category" onChange={handleChange} id="cat">
+                <option value=""></option>
+                <option value="Food">Food</option>
+                <option value="Entertainment">Entertainment</option>
+                <option value="Shopping">Shopping</option>
+                <option value="Bills">Bills</option>
+                <option value="Insurance">Insurance</option>
+                <option value="Loans">Loans</option>
+              </select>
+            </div>
+            <div className="expenseinput">
+              <label htmlFor="Amount">Date of Expenditure: </label>
+              <input
+                type="date"
+                name="ExpenseDate"
+                value={userInput.ExpenseDate}
+                onChange={handleChange}
+              />
+            </div>
+          </form>
+          <div className="expenseinput">
+            <button onClick={handleSubmit}>Add Expenses</button>
+          </div>
+          {inputError ? (
+            <span className="inputerror">Please enter all the fields</span>
+          ) : (
+            ""
+          )}
+        </div>
+        <div className="expensetable">
+          <table>
+            <tbody>
+              <tr>
+                <th>No.</th>
+                <th>Expenses</th>
+                <th>Amount ($)</th>
+                <th>Category</th>
+                <th>Date</th>
+              </tr>
+              {del ? "" : displayExpenses}
+            </tbody>
+          </table>
+          <div className="expenseinput">
+            <button onClick={handleDelete}>Clear All Expenses</button>
+          </div>
+        </div>
       </div>
     </div>
   );
