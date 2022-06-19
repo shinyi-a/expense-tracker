@@ -1,5 +1,9 @@
 import "./App.css";
 import { useState } from "react";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { Pie } from "react-chartjs-2";
+
+ChartJS.register(ArcElement, Tooltip, Legend);
 
 function App() {
   //initialise array
@@ -33,6 +37,78 @@ function App() {
       <td>{item.ExpenseDate}</td>
     </tr>
   ));
+
+  let totalAmt = 0;
+  let totalFood = 0;
+  let totalEntertainment = 0;
+  let totalShopping = 0;
+  let totalBills = 0;
+  let totalInsurance = 0;
+  let totalLoans;
+
+  arr.map((item) => {
+    if (item.Category === "Food") {
+      totalFood = totalFood + parseFloat(item.Amount);
+    }
+    if (item.Category === "Entertainment") {
+      totalEntertainment = totalEntertainment + parseFloat(item.Amount);
+    }
+    if (item.Category === "Shopping") {
+      totalShopping = totalShopping + parseFloat(item.Amount);
+    }
+    if (item.Category === "Bills") {
+      totalBills = totalBills + parseFloat(item.Amount);
+    }
+    if (item.Category === "Insurance") {
+      totalInsurance = totalInsurance + parseFloat(item.Amount);
+    }
+    if (item.Category === "Loans") {
+      totalLoans = totalLoans + parseFloat(item.Amount);
+    }
+    totalAmt = totalAmt + parseFloat(item.Amount);
+    return totalAmt;
+  });
+  console.log("totalfood " + totalFood);
+
+  const data = {
+    labels: [
+      "Food",
+      "Entertainment",
+      "Shopping",
+      "Bills",
+      "Insurance",
+      "Loans",
+    ],
+    datasets: [
+      {
+        data: [
+          totalFood,
+          totalEntertainment,
+          totalShopping,
+          totalBills,
+          totalInsurance,
+          totalLoans,
+        ],
+        backgroundColor: [
+          "rgba(255, 99, 132, 0.2)",
+          "rgba(54, 162, 235, 0.2)",
+          "rgba(255, 206, 86, 0.2)",
+          "rgba(75, 192, 192, 0.2)",
+          "rgba(153, 102, 255, 0.2)",
+          "rgba(255, 159, 64, 0.2)",
+        ],
+        borderColor: [
+          "rgba(255, 99, 132, 1)",
+          "rgba(54, 162, 235, 1)",
+          "rgba(255, 206, 86, 1)",
+          "rgba(75, 192, 192, 1)",
+          "rgba(153, 102, 255, 1)",
+          "rgba(255, 159, 64, 1)",
+        ],
+        borderWidth: 1,
+      },
+    ],
+  };
 
   //information to be collected for expense tracker
   const [userInput, setInput] = useState({
@@ -113,6 +189,11 @@ function App() {
         <header className="header">Expense Tracker</header>
         <div className="headerline" />
         <div className="expenseform">
+          <div className="piecontainer">
+            <div className="piechart">
+              <Pie data={data} />
+            </div>
+          </div>
           <form>
             <div className="expenseinput">
               <label htmlFor="Item">Expense: </label>

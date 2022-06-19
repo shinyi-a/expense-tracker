@@ -108,3 +108,15 @@ table {
 }
 
 tr:hover {background-color: lightgoldenrodyellow;}
+
+.piechart {
+width: 300px;
+width: 80%;
+}
+
+.piecontainer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0px 0px 15px;
+}
