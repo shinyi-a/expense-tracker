@@ -44,7 +44,7 @@ function App() {
     console.log(userInput);
   };
 
-  //store expense item in local storage
+  //store expense item in local storage and clear form
   const handleSubmit = (e) => {
     e.preventDefault();
     count++;
@@ -58,6 +58,8 @@ function App() {
       Category: "",
       ExpenseDate: "",
     });
+    let dropDown = document.getElementById("cat");
+    dropDown.selectedIndex = "";
   };
 
   //clear all items in local storage
@@ -75,30 +77,45 @@ function App() {
       <header className="App-header">Expense Tracker</header>
       <div>
         <form>
+          <label htmlFor="Item">Expense: </label>
           <input
             type="text"
             name="Item"
             value={userInput.Item}
             onChange={handleChange}
           />
+          <br />
+          <br />
+          <label htmlFor="Amount">Amount($): </label>
           <input
             type="text"
             name="Amount"
             value={userInput.Amount}
             onChange={handleChange}
           />
-          <input
-            type="text"
-            name="Category"
-            value={userInput.Category}
-            onChange={handleChange}
-          />
+          <br />
+          <br />
+          <label htmlFor="Category">Category: </label>
+          <select name="Category" onChange={handleChange} id="cat">
+            <option value=""></option>
+            <option value="Food">Food</option>
+            <option value="Entertainment">Entertainment</option>
+            <option value="Shopping">Shopping</option>
+            <option value="Bills">Bills</option>
+            <option value="Insurance">Insurance</option>
+            <option value="Loans">Loans</option>
+          </select>
+          <br />
+          <br />
+          <label htmlFor="Amount">Date of Expenditure: </label>
           <input
             type="date"
             name="ExpenseDate"
             value={userInput.ExpenseDate}
             onChange={handleChange}
           />
+          <br />
+          <br />
         </form>
         <button onClick={handleSubmit}>Add Expenses</button>
         <button onClick={handleDelete}>Clear All Expenses</button>
