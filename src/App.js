@@ -2,12 +2,13 @@ import "./App.css";
 import { useState } from "react";
 
 function App() {
+  //initialise array
   let arr = [];
 
   //count how many expense items
   let count;
 
-  //checks if count is in local storage
+  //checks if count and expense are in local storage
   if (window.localStorage.getItem("count") === null) {
     count = 0;
     console.log("this is count " + count);
@@ -18,6 +19,14 @@ function App() {
     }
     console.log("this is count " + count);
   }
+
+  //check if delete is trigger
+  const [del, setDel] = useState(false);
+
+  //maps all expenses
+  const displayExpenses = arr.map((item) => (
+    <li key={new Date() + Math.random()}>{item.Item}</li>
+  ));
 
   //information to be collected for expense tracker
   const [userInput, setInput] = useState({
@@ -42,6 +51,7 @@ function App() {
     console.log("this is submit " + userInput);
     window.localStorage.setItem(`expense${count}`, JSON.stringify(userInput));
     window.localStorage.setItem("count", JSON.stringify(count));
+    setDel(false);
     setInput({
       Item: "",
       Amount: "",
@@ -50,12 +60,14 @@ function App() {
     });
   };
 
+  //clear all items in local storage
   const handleDelete = (e) => {
     e.preventDefault();
     console.log("delete clicked");
     window.localStorage.clear();
     count = 0;
     arr = [];
+    setDel(true);
   };
 
   return (
@@ -92,11 +104,7 @@ function App() {
         <button onClick={handleDelete}>Clear All Expenses</button>
       </div>
       <div>
-        <ol type="1">
-          {arr.map((item) => (
-            <li key={new Date() + Math.random()}>{item.Item}</li>
-          ))}
-        </ol>
+        <ol type="1">{del ? "" : displayExpenses}</ol>
       </div>
     </div>
   );
