@@ -110,8 +110,7 @@ table {
 tr:hover {background-color: lightgoldenrodyellow;}
 
 .piechart {
-width: 300px;
-width: 80%;
+width: 100%;
 }
 
 .piecontainer{

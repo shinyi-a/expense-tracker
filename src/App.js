@@ -191,7 +191,11 @@ function App() {
         <div className="expenseform">
           <div className="piecontainer">
             <div className="piechart">
-              <Pie data={data} />
+              <Pie
+                data={data}
+                height={"300px"}
+                options={{ maintainAspectRatio: false }}
+              />
             </div>
           </div>
           <form>
