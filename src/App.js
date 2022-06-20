@@ -2,6 +2,7 @@ import "./App.css";
 import { useState } from "react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Pie } from "react-chartjs-2";
+import Graph from "../src/graph";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -29,7 +30,7 @@ function App() {
 
   //maps all expenses
   const displayExpenses = arr.map((item) => (
-    <tr key={new Date() + Math.random()}>
+    <tr key={new Date() + Math.random()} className="expenseitem">
       <td>{arr.indexOf(item) + 1}.</td>
       <td>{item.Item}</td>
       <td>{item.Amount}</td>
@@ -44,7 +45,7 @@ function App() {
   let totalShopping = 0;
   let totalBills = 0;
   let totalInsurance = 0;
-  let totalLoans;
+  let totalLoans = 0;
 
   arr.map((item) => {
     if (item.Category === "Food") {
@@ -189,13 +190,14 @@ function App() {
         <header className="header">Expense Tracker</header>
         <div className="headerline" />
         <div className="expenseform">
-          <div className="piecontainer">
-            <div className="piechart">
-              <Pie
+          <div className="graphcontainer">
+            <div className="graphchart">
+              <Graph data={arr} />
+              {/* <Pie
                 data={data}
                 height={"300px"}
                 options={{ maintainAspectRatio: false }}
-              />
+              /> */}
             </div>
           </div>
           <form>

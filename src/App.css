@@ -47,7 +47,7 @@
 }
 .expensetracker {
   background-color: white;
-  padding: 20px;
+  padding: 25px 35px;
   min-width: 50%;
 }
 .expensetable {
@@ -107,15 +107,20 @@ table {
   width: 100%;
 }
 
-tr:hover {background-color: lightgoldenrodyellow;}
+.expenseitem:hover {background-color: #e7e1d6;}
 
-.piechart {
+.graphchart {
+padding: 0px 0px 15px;
 width: 100%;
 }
 
-.piecontainer{
+.graphcontainer{
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0px 0px 15px;
+  /* padding: 0px 0px 15px; */
+}
+
+tr:first-child {
+  background-color: #e5e8ef;
 }
