@@ -1,13 +1,12 @@
 import "./App.css";
 import { useState } from "react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import { Pie } from "react-chartjs-2";
 import Graph from "../src/graph";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 function App() {
-  //initialise array
+  //initialise array for list of expenses
   let arr = [];
 
   //count how many expense items
@@ -25,7 +24,7 @@ function App() {
     // console.log("this is count " + count);
   }
 
-  //check if delete is trigger
+  //check if delete is triggered
   const [del, setDel] = useState(false);
 
   //maps all expenses
@@ -38,78 +37,6 @@ function App() {
       <td>{item.ExpenseDate}</td>
     </tr>
   ));
-
-  let totalAmt = 0;
-  let totalFood = 0;
-  let totalEntertainment = 0;
-  let totalShopping = 0;
-  let totalBills = 0;
-  let totalInsurance = 0;
-  let totalLoans = 0;
-
-  arr.map((item) => {
-    if (item.Category === "Food") {
-      totalFood = totalFood + parseFloat(item.Amount);
-    }
-    if (item.Category === "Entertainment") {
-      totalEntertainment = totalEntertainment + parseFloat(item.Amount);
-    }
-    if (item.Category === "Shopping") {
-      totalShopping = totalShopping + parseFloat(item.Amount);
-    }
-    if (item.Category === "Bills") {
-      totalBills = totalBills + parseFloat(item.Amount);
-    }
-    if (item.Category === "Insurance") {
-      totalInsurance = totalInsurance + parseFloat(item.Amount);
-    }
-    if (item.Category === "Loans") {
-      totalLoans = totalLoans + parseFloat(item.Amount);
-    }
-    totalAmt = totalAmt + parseFloat(item.Amount);
-    return totalAmt;
-  });
-  console.log("totalfood " + totalFood);
-
-  const data = {
-    labels: [
-      "Food",
-      "Entertainment",
-      "Shopping",
-      "Bills",
-      "Insurance",
-      "Loans",
-    ],
-    datasets: [
-      {
-        data: [
-          totalFood,
-          totalEntertainment,
-          totalShopping,
-          totalBills,
-          totalInsurance,
-          totalLoans,
-        ],
-        backgroundColor: [
-          "rgba(255, 99, 132, 0.2)",
-          "rgba(54, 162, 235, 0.2)",
-          "rgba(255, 206, 86, 0.2)",
-          "rgba(75, 192, 192, 0.2)",
-          "rgba(153, 102, 255, 0.2)",
-          "rgba(255, 159, 64, 0.2)",
-        ],
-        borderColor: [
-          "rgba(255, 99, 132, 1)",
-          "rgba(54, 162, 235, 1)",
-          "rgba(255, 206, 86, 1)",
-          "rgba(75, 192, 192, 1)",
-          "rgba(153, 102, 255, 1)",
-          "rgba(255, 159, 64, 1)",
-        ],
-        borderWidth: 1,
-      },
-    ],
-  };
 
   //information to be collected for expense tracker
   const [userInput, setInput] = useState({
@@ -157,7 +84,7 @@ function App() {
     ) {
       setInputError(false);
       count++;
-      console.log("this is submit " + userInput);
+      // console.log("this is submit " + userInput);
       window.localStorage.setItem(`expense${count}`, JSON.stringify(userInput));
       window.localStorage.setItem("count", JSON.stringify(count));
       setDel(false);
@@ -177,7 +104,7 @@ function App() {
   //clear all items in local storage
   const handleDelete = (e) => {
     e.preventDefault();
-    console.log("delete clicked");
+    // console.log("delete clicked");
     window.localStorage.clear();
     count = 0;
     arr = [];
@@ -193,11 +120,6 @@ function App() {
           <div className="graphcontainer">
             <div className="graphchart">
               <Graph data={arr} />
-              {/* <Pie
-                data={data}
-                height={"300px"}
-                options={{ maintainAspectRatio: false }}
-              /> */}
             </div>
           </div>
           <form>
@@ -250,7 +172,7 @@ function App() {
             </div>
           </form>
           <div className="expenseinput">
-            <button onClick={handleSubmit}>Add Expenses</button>
+            <button onClick={handleSubmit}>Add Expense</button>
           </div>
           {inputError ? (
             <span className="inputerror">Please enter all the fields</span>
@@ -263,7 +185,7 @@ function App() {
             <tbody>
               <tr>
                 <th>No.</th>
-                <th>Expenses</th>
+                <th>Expense</th>
                 <th>Amount ($)</th>
                 <th>Category</th>
                 <th>Date</th>
