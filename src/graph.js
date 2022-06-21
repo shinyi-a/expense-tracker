@@ -881,20 +881,6 @@ const Graph = (prop) => {
     }
   }
 
-  //find out how many expenditure blocks per month
-  // const totalAmtDec = decDates.length;
-  // const totalAmtNov = novDates.length;
-  // const totalAmtOct = octDates.length;
-  // const totalAmtSep = sepDates.length;
-  // const totalAmtAug = augDates.length;
-  // const totalAmtJul = julDates.length;
-  // const totalAmtJun = junDates.length;
-  // const totalAmtMay = mayDates.length;
-  // const totalAmtApr = aprDates.length;
-  // const totalAmtMar = marDates.length;
-  // const totalAmtFeb = febDates.length;
-  // const totalAmtJan = janDates.length;
-
   //sorting data alignment by different month for graph creation
   let graphLabel = [];
   let graphData = [];
