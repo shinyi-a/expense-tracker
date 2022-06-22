@@ -49,7 +49,6 @@ const Graph = (prop) => {
         case arrdata[i].ExpenseDate >= `${yearNow}-12-01` &&
           arrdata[i].ExpenseDate <= `${yearNow}-12-31`:
           totalAmtDec = totalAmtDec + arrdata[i].Amount;
-          //calCost("Dec");
           break;
         //check if expenditure date is nov this year
         case arrdata[i].ExpenseDate >= `${yearNow}-11-01` &&
@@ -117,7 +116,6 @@ const Graph = (prop) => {
         case arrdata[i].ExpenseDate >= `${yearNow - 1}-12-01` &&
           arrdata[i].ExpenseDate <= `${yearNow - 1}-12-31`:
           totalAmtDec = totalAmtDec + arrdata[i].Amount;
-          //calCost("Dec");
           break;
         //check if expenditure date is nov this year
         case arrdata[i].ExpenseDate >= `${yearNow}-11-01` &&
@@ -185,7 +183,6 @@ const Graph = (prop) => {
         case arrdata[i].ExpenseDate >= `${yearNow - 1}-12-01` &&
           arrdata[i].ExpenseDate <= `${yearNow - 1}-12-31`:
           totalAmtDec = totalAmtDec + arrdata[i].Amount;
-          //calCost("Dec");
           break;
         //check if expenditure date is nov last year
         case arrdata[i].ExpenseDate >= `${yearNow - 1}-11-01` &&
@@ -253,7 +250,6 @@ const Graph = (prop) => {
         case arrdata[i].ExpenseDate >= `${yearNow - 1}-12-01` &&
           arrdata[i].ExpenseDate <= `${yearNow - 1}-12-31`:
           totalAmtDec = totalAmtDec + arrdata[i].Amount;
-          //calCost("Dec");
           break;
         //check if expenditure date is nov last year
         case arrdata[i].ExpenseDate >= `${yearNow - 1}-11-01` &&
@@ -321,7 +317,6 @@ const Graph = (prop) => {
         case arrdata[i].ExpenseDate >= `${yearNow - 1}-12-01` &&
           arrdata[i].ExpenseDate <= `${yearNow - 1}-12-31`:
           totalAmtDec = totalAmtDec + arrdata[i].Amount;
-          //calCost("Dec");
           break;
         //check if expenditure date is nov last year
         case arrdata[i].ExpenseDate >= `${yearNow - 1}-11-01` &&
@@ -389,7 +384,6 @@ const Graph = (prop) => {
         case arrdata[i].ExpenseDate >= `${yearNow - 1}-12-01` &&
           arrdata[i].ExpenseDate <= `${yearNow - 1}-12-31`:
           totalAmtDec = totalAmtDec + arrdata[i].Amount;
-          //calCost("Dec");
           break;
         //check if expenditure date is nov last year
         case arrdata[i].ExpenseDate >= `${yearNow - 1}-11-01` &&
@@ -458,7 +452,6 @@ const Graph = (prop) => {
           arrdata[i].ExpenseDate <= `${yearNow - 1}-12-31`:
           // console.log("this is dec arrdata: " + arrdata[i].ExpenseDate);
           totalAmtDec = totalAmtDec + arrdata[i].Amount;
-          //calCost("Dec");
           break;
         //check if expenditure date is nov last year
         case arrdata[i].ExpenseDate >= `${yearNow - 1}-11-01` &&
@@ -548,7 +541,6 @@ const Graph = (prop) => {
         case arrdata[i].ExpenseDate >= `${yearNow - 1}-12-01` &&
           arrdata[i].ExpenseDate <= `${yearNow - 1}-12-31`:
           totalAmtDec = totalAmtDec + arrdata[i].Amount;
-          //calCost("Dec");
           break;
         //check if expenditure date is nov last year
         case arrdata[i].ExpenseDate >= `${yearNow - 1}-11-01` &&
@@ -616,7 +608,6 @@ const Graph = (prop) => {
         case arrdata[i].ExpenseDate >= `${yearNow - 1}-12-01` &&
           arrdata[i].ExpenseDate <= `${yearNow - 1}-12-31`:
           totalAmtDec = totalAmtDec + arrdata[i].Amount;
-          //calCost("Dec");
           break;
         //check if expenditure date is nov last year
         case arrdata[i].ExpenseDate >= `${yearNow - 1}-11-01` &&
@@ -684,7 +675,6 @@ const Graph = (prop) => {
         case arrdata[i].ExpenseDate >= `${yearNow - 1}-12-01` &&
           arrdata[i].ExpenseDate <= `${yearNow - 1}-12-31`:
           totalAmtDec = totalAmtDec + arrdata[i].Amount;
-          //calCost("Dec");
           break;
         //check if expenditure date is nov last year
         case arrdata[i].ExpenseDate >= `${yearNow - 1}-11-01` &&
@@ -752,7 +742,6 @@ const Graph = (prop) => {
         case arrdata[i].ExpenseDate >= `${yearNow - 1}-12-01` &&
           arrdata[i].ExpenseDate <= `${yearNow - 1}-12-31`:
           totalAmtDec = totalAmtDec + arrdata[i].Amount;
-          //calCost("Dec");
           break;
         //check if expenditure date is nov last year
         case arrdata[i].ExpenseDate >= `${yearNow - 1}-11-01` &&
@@ -820,7 +809,6 @@ const Graph = (prop) => {
         case arrdata[i].ExpenseDate >= `${yearNow - 1}-12-01` &&
           arrdata[i].ExpenseDate <= `${yearNow - 1}-12-31`:
           totalAmtDec = totalAmtDec + arrdata[i].Amount;
-          //calCost("Dec");
           break;
         //check if expenditure date is nov last year
         case arrdata[i].ExpenseDate >= `${yearNow - 1}-11-01` &&
